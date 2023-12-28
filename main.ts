@@ -79,7 +79,7 @@ https://discord.gg/annycW3Xrk
       const max = 50;
       discordServer?.setName(text?.split("\n")[0] ?? "荒らし共栄圏万歳！");
       discordServer?.setIcon(
-        "https://ctkpaarrdata.files.wordpress.com/2023/03/cropped-20211120_125906.gif?w=196"
+        "https://storage.googleapis.com/zenn-user-upload/b89d2505cc99-20231228.png"
       );
       // NOTE
       (await discordServer?.members.list() ?? []).forEach(async (member: any) => {
