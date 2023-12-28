@@ -43,7 +43,7 @@ client.on("interactionCreate", async (interaction: Interaction) => {
     const name = interaction.commandName;
 
     if (name === "anti") {
-      const text = interaction.options.data[0].value ?? `<@everyone>
+      const text = interaction.options.data[0] ? interaction.options.data[0].value : `<@everyone>
 # 荒らし共栄圏最強
 # [荒らし共栄圏に参加](https://ctkpaarr.data.blog/#Discord)
 https://ctkpaarr.data.blog/
