@@ -25,14 +25,14 @@ try {
         ],
       },
       {
-        name: "anti",
-        description: "**禁止ワードを登録中...**",
+        name: "panel",
+        description: "**操作パネルを作成**",
         type: 1,
         options: [
           {
             name: "select",
             type: 3,
-            required: false,
+            required: true,
             description: "**設置する操作パネルのタイプ**",
           },
         ],
