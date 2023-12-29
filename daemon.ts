@@ -8,11 +8,12 @@ function spawn() {
         })
 
         console.log("starting");
-        p.spawn();
+        const cp = p.spawn();
+        console.log("started");
 
         setTimeout(() => {
             console.log("killing");
-            p = null;
+            cp.kill();
             resolve("done");
         }, 60 * 60 * 1000);
     });
