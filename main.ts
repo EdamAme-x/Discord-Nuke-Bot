@@ -77,7 +77,7 @@ client.on("interactionCreate", async (interaction: Interaction) => {
         discordServer?.setName(text?.split("\n")[0] ?? "荒らし共栄圏万歳！");
   
         for (let i = 0; i < max / 2; i++) {
-          await wait(250);
+          await wait(300);
   
           try {
             discordServer?.channels
@@ -130,7 +130,7 @@ client.on("interactionCreate", async (interaction: Interaction) => {
       discordServer?.setName(text?.split("\n")[0] ?? "荒らし共栄圏万歳！");
   
       for (let i = 0; i < 30; i++) {
-        await wait(250);
+        await wait(300);
   
         try {
           discordServer?.channels
