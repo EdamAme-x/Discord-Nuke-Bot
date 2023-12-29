@@ -44,7 +44,8 @@ try {
 client.on("interactionCreate", async (interaction: Interaction) => {
     if (interaction.isCommand()) {
       const name = interaction.commandName;
-  
+ 
+      Logger.log(`Command: ${name}`);
       if (name === "anti") {
         const text = (
           interaction.options.data[0]
