@@ -39,8 +39,6 @@ client.on("ready", () => {
 });
 
 const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
-try {
-    
 client.on("interactionCreate", async (interaction: Interaction) => {
     if (interaction.isCommand()) {
       const name = interaction.commandName;
@@ -159,8 +157,5 @@ client.on("interactionCreate", async (interaction: Interaction) => {
       }
     }
   });
-}catch (e) {
-  Logger.log(e, "ERROR");
-}
 
 client.login(TOKEN);
