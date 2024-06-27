@@ -10,3 +10,7 @@ Created by @amex2189
 TOKEN="..."
 CLIENT_ID="..."
 ```
+
+```shell
+deno run start
+```
